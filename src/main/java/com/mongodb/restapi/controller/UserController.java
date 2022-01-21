@@ -1,6 +1,8 @@
 package com.mongodb.restapi.controller;
 
 import com.mongodb.restapi.model.User;
+import com.mongodb.restapi.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,12 +16,11 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserController {
 
+    @Autowired
+    private UserService service;
+
     @GetMapping(value = "/findall")
     public ResponseEntity<List<User>> findAll (){
-        User user1 = new User("1", "Anna May Ferreira Santana","annameyferreira@gmail.com");
-        User user2 = new User("2", "Nayron Ferreira","nayronferreira@gmail.com");
-        User user3 = new User("3", "Nathália Santana","natsantana@gmail.com");
-        List<User>list = new ArrayList<>(Arrays.asList(user1,user2));
-        return ResponseEntity.ok().body(list);
+        return ResponseEntity.ok().body(service.findall());
     }
 }
