@@ -1,5 +1,6 @@
 package com.mongodb.restapi.services;
 
+import com.mongodb.restapi.dto.UserDTO;
 import com.mongodb.restapi.exception.ObjectNotFound;
 import com.mongodb.restapi.model.User;
 import com.mongodb.restapi.repository.UserRepository;
@@ -23,4 +24,15 @@ public class UserService {
         return user.orElseThrow(()-> new ObjectNotFound("User not found =("));
     }
 
+    public User insert (User obj){
+        return repository.insert(obj);
+    }
+
+    public void deleteById (String id){
+        repository.deleteById(id);
+    }
+
+    public User fromDTO (UserDTO objDTO){
+        return new User(objDTO.getId(),objDTO.getName(),objDTO.getEmail());
+    }
 }
