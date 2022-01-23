@@ -35,4 +35,15 @@ public class UserService {
     public User fromDTO (UserDTO objDTO){
         return new User(objDTO.getId(),objDTO.getName(),objDTO.getEmail());
     }
+
+    public User update (User user) throws Exception {
+        User updateUser = findById(user.getId());
+        updateData(updateUser,user);
+        return repository.save(updateUser);
+    }
+
+    public void updateData (User userUpdate, User user){
+        userUpdate.setName(user.getName());
+        userUpdate.setEmail(user.getEmail());
+    }
 }

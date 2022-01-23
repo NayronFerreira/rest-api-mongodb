@@ -45,4 +45,12 @@ public class UserController {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping (value = "/update/{id}")
+    public ResponseEntity<Void> update (@RequestBody UserDTO userDTO, @PathVariable ("id") String id) throws Exception{
+        User userUpdate = service.fromDTO(userDTO);
+        userUpdate.setId(id);
+        userUpdate = service.update(userUpdate);
+        return ResponseEntity.noContent().build();
+    }
 }
