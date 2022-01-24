@@ -5,19 +5,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Document (collection = "user")
-public class User implements Serializable {
+@Document
+public class Post implements Serializable {
 
     @Id
     private String id;
-    private String name;
-    private String email;
-//    private List<Post> posts;
+    private Date date;
+    private String title;
+    private String body;
+    private User author;
 }
