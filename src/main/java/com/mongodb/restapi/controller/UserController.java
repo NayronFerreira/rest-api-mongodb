@@ -1,6 +1,7 @@
 package com.mongodb.restapi.controller;
 
 import com.mongodb.restapi.dto.UserDTO;
+import com.mongodb.restapi.model.Post;
 import com.mongodb.restapi.model.User;
 import com.mongodb.restapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,11 @@ public class UserController {
         userUpdate.setId(id);
         userUpdate = service.update(userUpdate);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping (value = "/{id}/posts")
+    public ResponseEntity<List<Post>>postsList (@PathVariable("id")String id) throws Exception {
+        User user = service.findById(id);
+        return ResponseEntity.ok().body(user.getPosts());
     }
 }

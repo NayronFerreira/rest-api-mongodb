@@ -32,10 +32,6 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    public User fromDTO (UserDTO objDTO){
-        return new User(objDTO.getId(),objDTO.getName(),objDTO.getEmail());
-    }
-
     public User update (User user) throws Exception {
         User updateUser = findById(user.getId());
         updateData(updateUser,user);
@@ -46,4 +42,9 @@ public class UserService {
         userUpdate.setName(user.getName());
         userUpdate.setEmail(user.getEmail());
     }
+
+    public User fromDTO (UserDTO objDTO){
+        return new User(objDTO.getId(),objDTO.getName(),objDTO.getEmail());
+    }
+
 }

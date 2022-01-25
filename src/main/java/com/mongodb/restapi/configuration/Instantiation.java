@@ -36,7 +36,6 @@ public class Instantiation implements CommandLineRunner {
         Post post3 = new Post(null, new Date(),"Calor é chato","Eu puxei meus pais e passo mal no calor",new AuthorDTO(may));
 
         repositoryPost.saveAll(Arrays.asList(post1,post2,post3));
-
         nayron.setPosts(Arrays.asList(post1));
         may.setPosts(Arrays.asList(post2,post3));
         repository.saveAll(Arrays.asList(may,nayron));
