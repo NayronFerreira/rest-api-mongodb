@@ -5,6 +5,8 @@ import com.mongodb.restapi.model.Post;
 import com.mongodb.restapi.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -16,5 +18,9 @@ public class PostService {
     public Post findById (String id) throws Exception {
         Optional<Post> post = repository.findById(id);
         return post.orElseThrow(()-> new ObjectNotFound("User not found =("));
+    }
+
+    public List<Post> findByTitleContaining (String text){
+        return repository.findByTitleContainingIgnoreCase(text);
     }
 }

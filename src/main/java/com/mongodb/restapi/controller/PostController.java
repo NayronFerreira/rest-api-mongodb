@@ -1,5 +1,6 @@
 package com.mongodb.restapi.controller;
 
+import com.mongodb.restapi.controller.util.URL;
 import com.mongodb.restapi.dto.UserDTO;
 import com.mongodb.restapi.model.Post;
 import com.mongodb.restapi.model.User;
@@ -21,10 +22,17 @@ public class PostController {
     @Autowired
     private PostService service;
 
-    @GetMapping(value = "/findById/{id}")
-    public ResponseEntity<Post> findById (@PathVariable("id")String id) throws Exception {
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Post> findById(@PathVariable("id")String id) throws Exception {
         Post post = service.findById(id);
         return ResponseEntity.ok().body(post);
+    }
+
+    @GetMapping (value = "/titlesearch")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam (value = "text", defaultValue = "") String text){
+        text = URL.decodeParam(text);
+        List<Post>postList = service.findByTitleContaining(text);
+        return ResponseEntity.ok().body(postList);
     }
 
 }

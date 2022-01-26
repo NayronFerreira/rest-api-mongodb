@@ -20,14 +20,14 @@ public class UserController {
     @Autowired
     private UserService service;
 
-    @GetMapping(value = "/findall")
+    @GetMapping
     public ResponseEntity<List<UserDTO>> findAll (){
         List<User>list = service.findall();
         List<UserDTO>listDto = list.stream().map(user -> new UserDTO(user)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
-    @GetMapping(value = "/findById/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> findById (@PathVariable("id")String id) throws Exception {
         UserDTO userDTO = new UserDTO(service.findById(id));
         return ResponseEntity.ok().body(userDTO);
